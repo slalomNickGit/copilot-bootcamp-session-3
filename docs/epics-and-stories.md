@@ -2,7 +2,48 @@
 
 > Generated based on requirements in docs/prd-todo.md and following the structure of docs/templates/epic-and-stories-template.md.
 
-## MVP Epics and Stories
+## Epics
+
+- MVP Epics
+  - Epic: Add Due Dates to Tasks
+  - Epic: Add Task Priority Levels
+  - Epic: Add Date-Based Task Filters
+  - Epic: Preserve Local-Only Storage
+- Post-MVP Epics
+  - Epic: Highlight Overdue Tasks
+  - Epic: Advanced Task Sorting
+
+## Stories
+
+- Epic: Add Due Dates to Tasks
+  - Story: Add due date field to task data model
+  - Story: Add due date input to task creation form
+  - Story: Add due date editing to existing tasks
+  - Story: Ignore and sanitize invalid due date values
+- Epic: Add Task Priority Levels
+  - Story: Add priority field to task data model
+  - Story: Default task priority to P3 when unspecified
+  - Story: Add priority selection to task creation form
+  - Story: Add priority editing to existing tasks
+  - Story: Display priority as color-coded badges
+- Epic: Add Date-Based Task Filters
+  - Story: Implement All tab to show all tasks
+  - Story: Implement Today tab to show today’s incomplete tasks
+  - Story: Implement Overdue tab to show overdue incomplete tasks
+- Epic: Preserve Local-Only Storage
+  - Story: Confirm enhancements work with existing local storage
+  - Story: Ensure no backend or external storage is introduced
+- Epic: Highlight Overdue Tasks
+  - Story: Visually emphasize overdue tasks in task list
+- Epic: Advanced Task Sorting
+  - Story: Sort tasks with overdue tasks first
+  - Story: Sort tasks by priority P1 to P3 within groups
+  - Story: Sort tasks by due date ascending within priority
+  - Story: Place tasks without due dates at the end of lists
+
+## Acceptance Criteria
+
+### MVP Epics and Stories
 
 - Epic: Add Due Dates to Tasks
   - Story: Add due date field to task data model
@@ -26,7 +67,7 @@
       - Tasks with invalid dueDate values do not cause errors in list or filter views.
       - Any previously stored invalid dueDate values are effectively ignored by filtering and sorting logic.
 
-- Epic: Add Task Priority Levels
+    - Epic: Add Task Priority Levels
   - Story: Add priority field to task data model
     - Acceptance Criteria:
       - Each task includes a priority field with allowed values "P1", "P2", or "P3".
@@ -49,7 +90,7 @@
       - P1 badges appear in red, P2 badges in orange, and P3 badges in gray.
       - Priority badges are visible in the main task list views.
 
-- Epic: Add Date-Based Task Filters
+    - Epic: Add Date-Based Task Filters
   - Story: Implement All tab to show all tasks
     - Acceptance Criteria:
       - An All tab is available in the UI alongside other filter tabs.
@@ -66,7 +107,7 @@
       - The Overdue tab displays only tasks that are not completed and have a dueDate earlier than the current date.
       - Tasks without a dueDate or with due dates today or in the future do not appear in the Overdue tab.
 
-- Epic: Preserve Local-Only Storage
+    - Epic: Preserve Local-Only Storage
   - Story: Confirm enhancements work with existing local storage
     - Acceptance Criteria:
       - All new task fields (dueDate and priority) are persisted using the existing local storage mechanism.
@@ -77,16 +118,16 @@
       - The app continues to function without requiring any server or network connectivity.
       - No new API calls or external storage services are used for saving or loading tasks.
 
-## Post-MVP Epics and Stories
+    ### Post-MVP Epics and Stories
 
-- Epic: Highlight Overdue Tasks
+    - Epic: Highlight Overdue Tasks
   - Story: Visually emphasize overdue tasks in task list
     - Acceptance Criteria:
       - Overdue tasks are visually distinct from non-overdue tasks in all list views where they appear.
       - The chosen visual style clearly communicates that a task is overdue (for example, using red text or background consistent with the design).
       - Completed tasks do not appear as overdue in Today or Overdue tabs.
 
-- Epic: Advanced Task Sorting
+    - Epic: Advanced Task Sorting
   - Story: Sort tasks with overdue tasks first
     - Acceptance Criteria:
       - In supported views, overdue tasks appear before all non-overdue tasks.
@@ -103,3 +144,15 @@
     - Acceptance Criteria:
       - Tasks without a dueDate appear after all tasks with a dueDate when lists are sorted.
       - Undated tasks still respect the priority ordering relative to each other if applicable.
+
+    ## Technical Requirements
+
+    - The Todo app remains a front-end-only application; no new backend services or APIs are introduced.
+    - All task data, including title, dueDate, and priority, is persisted using the existing local storage mechanism.
+    - The task data model includes:
+      - title: required string.
+      - priority: enum value of "P1", "P2", or "P3" with default "P3".
+      - dueDate: optional ISO YYYY-MM-DD string when present.
+    - Invalid dueDate values are ignored by business logic and do not break rendering or filtering.
+    - Filter tabs (All, Today, Overdue) are available in the UI and can be switched without page reloads.
+    - Sorting logic (for Post-MVP) orders tasks as overdue first, then by priority (P1 to P3), then by due date ascending, with undated tasks last.
