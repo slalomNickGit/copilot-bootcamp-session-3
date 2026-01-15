@@ -46,7 +46,7 @@ input {
 
 button {
   padding: 8px 16px;
-  background-color: #61dafb;
+  background-color: #07F2E6;
   color: #282c34;
   border: none;
   border-radius: 4px;
@@ -55,7 +55,36 @@ button {
 }
 
 button:hover {
-  background-color: #21a1c9;
+  background-color: #05C7BE;
+}
+
+/* Priority buttons - colors from sketch */
+.priority-btn {
+  background-color: #7A7A7A;
+  color: white;
+  border: 1px solid #7A7A7A;
+  border-radius: 4px;
+  padding: 4px 8px;
+  margin: 2px;
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.priority-btn:hover {
+  opacity: 0.8;
+}
+
+.priority-btn.selected {
+  background-color: #07F2E6;
+  border-color: #07F2E6;
+  color: white;
+}
+
+.priority-btn.unselected {
+  background-color: #7A7A7A;
+  border-color: #7A7A7A;
+  color: white;
 }
 
 ul {
